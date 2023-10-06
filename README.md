@@ -90,9 +90,7 @@ function HellWord(){
        <div>
         <h1>Meu primeiro componente</h1>
        </div> 
-    )
-    
-
+    )    
 }
 
 export default HellWord
@@ -100,8 +98,9 @@ export default HellWord
 ```
 ```JS
 
-function frase(){
-    return(
+function frase(){ 
+
+  return(
         <div>
             <p>Este é um componente com uma frase</p>
         </div>
