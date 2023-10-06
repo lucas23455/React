@@ -1,4 +1,4 @@
-# Introduaçao de React
+# Introduçao de React
 
 - Uma biblioteca JS para criaçao de interfaces;
 - utilizaçao para construir SPAs (Single Page Application);
@@ -34,6 +34,119 @@ Execuçao do script e depois ele ira para site do React
 ```
 npm start
 ```
+
+# Entendendo o JSX
+
+- O jSX é como um html, porem dentro do codigo JavaScript
+- É a principal maneira de escrever HTML com o React
+- Podemos interpolar variaveis, inserindo ela entre {};
+- É possivel tambem executar funcoes em jSX;
+- Inserir valores em atributos de tags tambem é valido em JSX
+
+Voce ira pro app.js e pode colocar variaveis funcoes e ulr no JavaScript com tags de HTML
+
+```HTML
+import './App.css';
+
+function App() {
+  const name= "lucas"
+  const newName= name.toLowerCase()
+
+  function soma(a,b){
+      return a+b
+  }
+const url = 'https://via.placeholder.com/150'
+
+  return (
+    <div className="App">
+     <h2>alterando o JSX</h2>
+     <p>ola,{newName}</p>
+     <p>Soma: {soma(3,7)} </p>
+     <img src="{url}}" alt="minha imagem"/>
+      <p>ol</p>
+    </div>
+  );
+}
+
+export default App;
+
+
+```
+
+# Componentes
+- Permite dividir a aplicaçao em partes
+- Os componestes rederizam JSX ,assim como App.js (que é um componente);
+- Precisamos criar um arquivo de componente;
+- E importa-lo onde precisamos utilizar;
+- Normalmente ficam em uma pasta chamada componests;
+
+criar uma pasta chamada "componests" e dentro dela criar um JavaScript "HelloWorld" e "frase"
+
+```JS
+
+function HellWord(){
+  
+    return (
+       <div>
+        <h1>Meu primeiro componente</h1>
+       </div> 
+    )
+    
+
+}
+
+export default HellWord
+
+```
+```JS
+
+function frase(){
+    return(
+        <div>
+            <p>Este é um componente com uma frase</p>
+        </div>
+    )
+}
+
+export default frase
+```
+
+E importar esse arquivo em App.js e colocar "HellWord" "frase"
+
+
+```JS
+import './App.css'
+import HellWord from './components/HelloWorld'
+import frase from './components/frase'
+
+
+function App() {
+  const name= "lucas"
+  const newName= name.toLowerCase()
+
+  function soma(a,b){
+      return a+b
+  }
+const url = 'https://via.placeholder.com/150'
+
+  return (
+    <div className="App">
+     <h2>alterando o JSX</h2>
+     <p>ola,{newName}</p>
+     <p>Soma: {soma(3,7)} </p>
+     <img src="{url}}" alt="minha imagem"/>
+      <HellWord/>
+      <frase/>
+    </div>
+  );
+}
+
+export default App;
+```
+
+# Props
+
+
 
 
 
