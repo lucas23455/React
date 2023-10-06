@@ -35,9 +35,7 @@ Execuçao do script e depois ele ira para site do React
 npm start
 ```
 
-<p align="center">
-   <img alt="![image](https://github.com/lucas23455/React/assets/80688055/1c07fe37-7cc4-498e-8fff-3093e810e9f2)" height=300px>
-</p>
+
 
 
 
