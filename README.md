@@ -235,7 +235,83 @@ function App(){
 export default App;
 ```
 # Adionando CSS
+- O CSS pode ser adionado de forma global na aplicaçao, por meio do arquivo index.css por exemplo;
+- Porem é possivel estilizar a nivel de componentes;
+- Utilizamos o CSS modules para isso;
+- Basta criar um arquivo como: Components.module.css;
+- E chamar este CSS no componente;
 
+Escopo global "index.css"
+```css
+body{
+  padding: 50px;
+  background: rgb(137, 109, 150);
+}
+
+h1{
+  color: aqua;
+}
+```
+
+```js
+import './App.css'
+
+
+function App(){
+  return(
+    <div className="App">
+      <h1>Testando CSS</h1>   
+    </div>
+  )
+}
+export default App;
+```
+Ou criamos um "frase.module.css" dentro da pasta "components"
+```css
+.fraseContainer{
+    background-color: #333;
+    border: 1px solid #111;
+}
+
+.fraseContent{
+    color: #fff;
+    background-color: #333;
+    margin: 0;
+
+}
+````
+importamos em "frase.js"
+```css
+import styles from './frase.module.css'
+
+function frase(){
+    return(
+        <div className={styles.fraseContainer}>
+            <p>Este é um componente com uma frase</p>
+        </div>
+    )
+}
+export default frase
+```
+e depois importamos em "App.js"
+```css
+import './App.css'
+import frase from './components/frase'
+
+
+
+function App(){
+  return(
+    <div className="App">
+      <h1>Testando CSS</h1> 
+      <frase/> 
+      <frase/> 
+    </div>
+  )
+}
+export default App;
+
+```
 
 
 
