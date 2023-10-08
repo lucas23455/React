@@ -144,8 +144,97 @@ export default App;
 ```
 
 # Props
+- As props são valores passados para componentes;
+- Podemos deixa-los dinamicos;
+- Ou seja, mudando a execuçao por causa do valor da prop;
+- O valor é passado como um atributo na chamada do componeste;
+- E precisa ser resgatado dentro de uma propriedade/argumento
+  (chamada props na funcao de definiçao do componente)
+- As props somente de leitura
 
 
+Cria um "SayMyName.js"
+```js
+function SayMyName(props){
+    return(
+        <div>
+            <p>
+                <p>Fala ai {props.nome},suave?</p>
+            </p>
+        </div>
+    )
+}
+export default SayMyName
+```
+importa-o assim voce pode colocar o atributo "nome" para chama-lo
+```js
+import './App.css'
+import SayMyName from './components/SayMyName';
+
+
+function App(){
+  return(
+    <div className="App">
+       <SayMyName nome="Lucas"/>
+    </div>
+  )
+}
+export default App;
+
+```
+E voce pode criar uma variavel e chama-lo no componente "SayMyName"
+```js
+import './App.css'
+import SayMyName from './components/SayMyName';
+
+
+function App(){
+  const nome= "maria"
+  return(
+    <div className="App">
+       <SayMyName nome={nome}/>
+    </div>
+  )
+}
+export default App;
+
+```
+Para facilitar, podemos colocar os atributos dentro de Pessoa ao inves de "Props" facilitando a escrita
+```js
+function Pessoa(nome,idade,profissao,foto){
+    return(
+        <div>
+           <img src={foto} alt="{props.nome}"/>
+           <h2>Nome: {nome}</h2>
+           <p>Idade: {idade}</p>
+           <p>Profisssao: {profissao}</p>
+        </div>
+    )
+}
+export default Pessoa
+
+```
+
+```js
+import './App.css'
+import Pessoa from './components/Pessoa';
+
+
+function App(){
+  return(
+    <div className="App">
+      <Pessoa 
+        nome="Lucas"
+        idade ="21"
+        profissao ="programador"
+        foto="https://via.placeholder.com/150"
+        />
+    </div>
+  )
+}
+export default App;
+```
+# Adionando CSS
 
 
 
