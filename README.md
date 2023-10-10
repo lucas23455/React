@@ -310,9 +310,151 @@ function App(){
   )
 }
 export default App;
-
 ```
 
+# Fragmentos
+- Os reacts Fragments permite a criaçao de um componente sem elemento pai;
+- O propósito é descomplicar os nó do DOM
+- A sintaxe é <> e </>, não há nome para a tag;
+- Criamos no proprio JSX;
+
+Criamos "List.js" e os fragements seriam "tags sem nomes"
+```js
+function List(){
+    return (
+        <>
+            <h1>Minha lista</h1>
+            <ul>
+                <li>item 1</li>
+                <li>item 2</li>
+            </ul>
+        </>
+    )
+}
+export default List
+```
+E importamos
+```js
+import './App.css'
+import list from './components/list';
+
+function App(){
+  return(
+    <div className="App">
+      <list/>
+    </div>
+  )
+}
+export default App;
+```
+# Avançamdo em props
+- Podemos definir tipos para as props ,realizando uma especie de validaçao;
+- Definimos em um objeto chamado propsTypes no proprio componente;
+- E ainda há a possiblidade de definir um valor padrao;
+- Neste caso utilizamos o objeto defaultProps;
+
+Metodos mais avançados de Props
+```js
+import PropTypes from 'prop-types'
+
+function item(marca ,ano_lancamento){
+    return(
+        <>
+        <li>{marca}-{ano_lancamento}</li>
+        </>
+    )
+}
+item.propTypes={
+  marca: PropTypes.string,
+}
+
+export default item
+```
+```js
+import item from "./item";
+
+function list() {
+    return (
+        <>
+            <h1>Minha lista</h1>
+            <ul>
+                <item marca="ferrari"ano_lancamento={1984}/>
+                <item marca="fiat" ano_lancamento={1962}/>
+            </ul>
+        </>
+    );
+}
+
+export default list;
+```
+# Eventos
+- Os eventos de react sao os mesmo eventos do DOM;
+- Ou sejam temos eventos para responder a um click;
+- O evento é atrelado a uma tag que irá executa-lo;
+- Geralmente um metodo é atribuido ao evento;
+- Este metodo deve ser criado no componente;
+
+Criamos um arquivo componentes "Evento.js" usando "onClick"
+```js
+function Evento(){
+    function meuEvento(){
+        console.log("ola seu troxa")
+    }
+
+    return(
+        <div>
+            <p>Clique para disparar o evento:</p>
+            <button onClick={meuEvento}>Ativar</button>
+        </div>
+    )
+}
+export default Evento
+    )
+}
+export default Evento
+```
+
+usando o "onsubmit"
+```js
+function Form(){
+    function cadastrarUsuario(e){
+        e.preventDefaut()
+        console.log("cadastrou!")
+    }
+    return(
+        <div>
+            <h1>Meu cadrastro</h1>
+            <form onSubmit={cadastrarUsuario}>
+                <div>
+                    <input type="text" placeholder="Digite o nome"></input>
+                </div>
+                <div>
+                    <input type="submit" value="cadrastra"></input>
+                </div>
+            </form>
+        </div>
+    )
+}
+export default Form
+```
+E depois importamos
+```js
+import './App.css'
+import Evento from './components/Evento';
+import Form  from './components/Form';
+
+function App(){
+  return(
+    <div className="App">
+      <h1>Testando Eventos</h1>
+      <Evento/>
+      <Form/>
+    </div>
+    
+  )
+}
+export default App;
+```
 
 
 
