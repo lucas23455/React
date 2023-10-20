@@ -455,6 +455,256 @@ function App(){
 }
 export default App;
 ```
+# Renderizaçao de listas
+- Para renderizar uma lista vamos primeiramente de um array;
+- Depois utilizamos a funçao map, para percorrer cada um dos itens;
+- Podendo assim renderizar algo na tela;
+- É possivel unir operadores condicionais com a renderizaçao de listas;
+
+Criando outra pasta
+```js
+function OutraLista({ itens }) {
+    return (
+        <>
+            <h3>listas de coisas boas</h3>
+          // if e else em React
+            {itens.length > 0 ? (
+                itens.map((item ,index) => (
+                    <p key={index}>{item}</p>
+                ))) : (
+                    <p>nao ha itens na lista</p>
+                ) }
+        </>
+    )
+            
+}
+export default OutraLista
+```
+
+
+```js
+function App() {
+  
+  const meusItens=['react','vue','angular']
+
+  return(
+    <div className="App">
+      <h1>Renderizaçao de listas</h1>
+      <OutraLista itens={meusItens} />
+      <OutraLista itens={[]}/>
+    </div>
+    
+  )
+}
+export default App;
+```
+
+# State Lift
+- State Lift é uma tecnica utilizada para compartilhar o state
+- É normal varios componentes dependerem do mesmo estado;
+- Entao precisamos elevar o nivel do mesmo a um componente pai;
+- Então centralizamos o state do pai, e definimos quem usa e quem define (setState)
+
+```js
+function SeuNome({setNome}) {
+    
+    return (
+        
+        <div>
+            <p>digite seu nome</p>
+            <input type="text" placeholder="qual seu nome?" onChange={(e)=> setNome(e.target.value)} />
+            
+      </div>  
+    )
+}
+export default SeuNome
+```
+```js
+function Saudacao({ nome }) {
+    function gerarSaudacao(algumNome) {
+        return `Olá, ${algumNome}, tudo bem?`
+    }
+
+    return (
+        <>
+            {nome && <p>{gerarSaudacao(nome)}</p>} 
+        </>
+    );
+}
+
+export default Saudacao;
+
+```
+```js
+import './App.css'
+import {useState} from 'react'
+import SeuNome from './components/SeuNome'
+import Saudacao from './components/Saudacao'
+
+
+function App() {
+  
+  const [nome, setNome] = useState()
+
+  return(
+    <div className="App">
+      <h1>State Lift</h1>
+      <SeuNome setNome={setNome} />
+      <Saudacao nome={nome} />
+    </div>
+    
+  )
+}
+export default App;
+
+```
+
+# React Router
+- O react Router é um pacote para mudança de URLs da aplicaçao;
+- Podemos assim acessar outras views, sem o page reload
+- Trocando apenas uma parte do layout da aplicaçao, ou seja, o que muda de view para view
+- Precisamos instalar este pacote no projeto;
+- E tambem realizar algumas mudanças em como o App é estruturado
+
+Para instalar o pacote seguir esse comando
+```
+npm install react-router-dom
+```
+```js
+import {Link} from 'react-router-dom'
+
+function Navbar() {
+    return (
+        <ul>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/empresa">Empresa</Link></li>
+            <li><Link to="/contato">Contato</Link></li>
+        </ul>
+    )
+}
+export default Navbar
+```
+```js
+function Home() {
+    return (
+        <div>
+            <h1>Home</h1>
+            <p>Conteudo da pagina</p>
+        </div>
+    )
+}
+export default Home
+```
+
+```js
+function Contato() {
+    return (
+        <div>
+            <h1>Contato</h1>
+            <p>Conteudo da pagina</p>
+        </div>
+    )
+}
+export default Contato
+```
+```js
+function Empresa() {
+    return (
+        <div>
+            <h1>Empresa</h1>
+            <p>Conteudo da pagina</p>
+        </div>
+    )
+}
+export default Empresa
+
+```
+
+```js
+import './App.css'
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import { Routes } from 'react-router-dom'; // Importe 'Routes' em vez de 'Switch'
+import Home from './components/pages/Home';
+import Empresa from './components/pages/Empresa';
+import Contato from './components/pages/Contato';
+import Navbar from './components/Navbar';
+
+function App() {
+  return (
+    <div className="App">
+      <h1>React Router</h1>
+      <Router>
+        <Navbar/>
+
+        <Routes>
+          <Route path="/empresa" element={<Empresa />} />
+          <Route path="/contato" element={<Contato />} />
+          <Route path="/" element={<Home />} />
+        </Routes>
+      </Router>
+    </div>
+  )
+}
+
+export default App;
+
+```
+
+# React Icons
+- O react Icons é um pacote de icones externo;
+- Precisamos adicionar ao projeto atraves do npm
+- Ele nos permite adicionar icones ao projeto com uma sintaxe parecida a de componentes;
+- Alem disso há uma grande quantidade de icones disponiveis;
+
+
+Para instalar o pacote de icons
+```
+npm install react-icons 
+```
+```js
+import {FaFacebook} from 'react-icons/fa'
+
+
+function Footer() {
+    return <footer><FaFacebook/></footer>
+}
+export default Footer
+
+```
+```js
+import './App.css'
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import { Routes } from 'react-router-dom'; // Importe 'Routes' em vez de 'Switch'
+import Home from './components/pages/Home';
+import Empresa from './components/pages/Empresa';
+import Contato from './components/pages/Contato';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+
+function App() {
+  return (
+    <div className="App">
+      <h1>React Router</h1>
+      <Router>
+        <Navbar/>
+
+        <Routes>
+          <Route path="/empresa" element={<Empresa />} />
+          <Route path="/contato" element={<Contato />} />
+          <Route path="/" element={<Home />} />
+        </Routes>
+        <Footer/>
+      </Router>
+    </div>
+  )
+}
+
+export default App;
+```
+
+
+
+
 
 
 
